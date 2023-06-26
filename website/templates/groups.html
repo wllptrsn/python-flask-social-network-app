@@ -1,0 +1,22 @@
+{% extends "header.html" %} {% block title %}Groups{% endblock %} {%block
+content%}
+<h1 align="center">Groups</h1>
+<a href="/createGroup">Create Group</a>
+<h2>My Groups</h2>
+{% for group in group_users %}
+<a href="groups/{{group.name}}"
+  ><span
+    ><h2>{{group.name}}</h2>
+    <p>{{group.details}}</p></span
+  ></a
+>
+{% endfor %}
+<h1>Discover</h1>
+{% for group in discover %}
+<a href="groups/{{group.name}}"
+  ><span
+    ><h2>{{group.name}}</h2>
+    <p>{{group.details}}</p></span
+  ></a
+>
+{% endfor %} {% endblock %}

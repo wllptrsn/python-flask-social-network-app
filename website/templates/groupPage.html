@@ -1,0 +1,82 @@
+{% extends "header.html" %} {% block title %}Groups{% endblock %} {%block
+content%}
+<h1 align="center">{{group.name}}</h1>
+<p align="center">{{group.details}}</p>
+<span id="members-count-{{group.id}}"> {{group.users|length+ 1}}</span>
+{% if user.id == group.admin_id %}
+<a href="/deleteGroup/{{group.id}}">Delete Group</a>
+<a href="/editGroup/{{group.id}}">Edit Group</a> {% else %}
+<button id="join-{{group.id}}" onclick="join({{group.id}})">
+  {% if user.id in group.users|map(attribute="user_id")|list %} Leave Group {%
+  else %} Join Group {% endif %}</button
+>{% endif %}
+
+<form method="POST">
+  <h5>Post in Group</h5>
+
+  <div class="form-group">
+    <label for="content">Post in Group:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="content"
+      name="content"
+      placeholder="Write a Message:"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% for post in posts %}
+<div id="groupPosts">
+  {{group.name}}
+  <div class="card border-dark m-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      {{post.user.username}} {{post.date.strftime('%m-%d-%Y %I:%M %p')}}{% if
+      user.id == post.user.id %}
+      <button type="button" class="close" onClick="deletePost({{ post.id }})">
+        <span>&times;</span>
+      </button>
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <div class="card-text">{{post.content}}</div>
+      <br />
+      {% for comment in post.postComments %}
+      <div class="card">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          {{comment.user_id}} {{comment.date.strftime('%m-%d-%Y %I:%M %p')}}{%
+          if user.id == post.user.id or user.id == comment.user_id %}
+          <button
+            type="button"
+            class="close"
+            onClick="deletePostComment({{ comment.id }})"
+          >
+            <span>&times;</span>
+          </button>
+          {% endif %}
+        </div>
+        {{comment.content}}
+      </div>
+      {% endfor %}
+    </div>
+    <form
+      class="input-group mb-3"
+      method="POST"
+      action="/create-comment/{{post.id}}"
+    >
+      <input
+        type="content"
+        id="content"
+        name="content"
+        class="form-control"
+        placeholder="Comment something!"
+      />
+      <button>submit</button>
+    </form>
+  </div>
+</div>
+
+{% endfor %} {% endblock %}

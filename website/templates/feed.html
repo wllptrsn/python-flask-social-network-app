@@ -1,0 +1,59 @@
+{% extends "header.html" %}{% block title %}Feed{% endblock %} {%block content%}
+{% for post in posts %}
+<div id="posts">
+  {% if post.group_id %} {% for group in groups %} {% if group.id ==
+  post.group_id %} {{ group.name }} {% endif %}{% endfor %} {% endif %}
+  <div class="card border-dark m-5">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      {% for profile in post.user.profiles%}
+      <img
+        src="{{url_for('static', filename= 'img/' + profile.profile_pic)}}"
+        class="thumbnail_profile"
+      />{% endfor%} {{post.user.username}} {{post.date.strftime('%m-%d-%Y %I:%M
+      %p')}}{% if user.id == post.user.id %}
+      <button type="button" class="close" onClick="deletePost({{ post.id }})">
+        <span>&times;</span>
+      </button>
+      {% endif %}
+    </div>
+    <div class="card-body">
+      <div class="card-text">{{post.content}}</div>
+      <br />
+      {% for comment in post.postComments %}
+      <div class="card">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          {{comment.user_id}} {{comment.date.strftime('%m-%d-%Y %I:%M %p')}}{%
+          if user.id == post.user.id or user.id == comment.user_id %}
+          <button
+            type="button"
+            class="close"
+            onClick="deletePostComment({{ comment.id }})"
+          >
+            <span>&times;</span>
+          </button>
+          {% endif %}
+        </div>
+        {{comment.content}}
+      </div>
+      {% endfor %}
+    </div>
+    <form
+      class="input-group mb-3"
+      method="POST"
+      action="/create-comment/{{post.id}}"
+    >
+      <input
+        type="content"
+        id="content"
+        name="content"
+        class="form-control"
+        placeholder="Comment something!"
+      />
+      <button>submit</button>
+    </form>
+  </div>
+</div>
+
+{% endfor %} {% endblock %}

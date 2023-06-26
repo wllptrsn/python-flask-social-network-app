@@ -1,0 +1,50 @@
+{% extends "header.html" %}{% block title %}Users{% endblock %} {%block
+content%}
+<p>{{profile.description}}</p>
+{% if current_user.id != account.id %}
+<a href="/follow/{{account.username}}"
+  ><button>
+    {% if user_follows %} Unfollow {% else %}Follow{% endif %}
+  </button></a
+>
+{% endif %}
+<h1 align="center">{{account.username}}'s Profile</h1>
+{% for profile in account.profiles%}
+<img
+  src="{{url_for('static', filename= 'img/' + profile.profile_pic)}}"
+  class="profile"
+/>
+{% endfor %}
+<ul class="list-froup list-group-flush" id="user_profile">
+  {% for post in posts %}
+  <li class="list-group-item">
+    <h4>{{account.username}}</h4>
+    <div>
+      {% if user.id == profile.id%}
+      <button type="button" class="close" onClick="deletePost({{post.id}})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {% endif %}
+    </div>
+    <span id="likes-count-{{post.id}}"> {{post.likes|length}}</span
+    ><span id="likes-ext-{{post.id}}">
+      {% if post.likes|length ==1%}like{% else %} likes{% endif %}</span
+    >
+    {% if user.id in post.likes|map(attribute="author")|list %}
+    <i
+      class="fas fa-thumbs-up"
+      id="like-button-{{post.id}}"
+      onclick="like({{post.id}})"
+    ></i>
+    {% else %}
+    <i
+      class="far fa-thumbs-up"
+      id="like-button-{{post.id}}"
+      onclick="like({{post.id}})"
+    ></i>
+    {% endif %} {{post.date.strftime('%m-%d-%Y %I:%M %p')}}<br />
+    {{post.content}}
+  </li>
+  {% endfor%}
+</ul>
+{% endblock %}

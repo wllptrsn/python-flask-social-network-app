@@ -1,0 +1,37 @@
+.interest_card_selected {
+  background-color: red;
+}
+#interest_card {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+.navbar a {
+  color: antiquewhite;
+}
+.navbar_interior {
+  display: flex;
+  flex-wrap: wrap;
+  /* for horizontal aligning of child divs */
+  justify-content: center;
+  list-style-type: none;
+}
+.navbar_interior li {
+  padding: 20px;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.dropdown-menu {
+  background-color: blue;
+}
+.thumbnail_profile {
+  height: 100px;
+}
+.profile {
+  height: 200px;
+}
+.active {
+  font-weight: bold;
+}

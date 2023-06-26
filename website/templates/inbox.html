@@ -1,0 +1,21 @@
+{% include "messages.html" %} {%block content%}
+
+<ul class="list-froup list-group-flush" id="messages">
+  {% for message in inbox%}
+  <li class="list-group-item">
+    {% if user.id == message.user_id or user.id == message.recipient_id %}
+    <button
+      type="button"
+      class="close"
+      onClick="deleteMessage({{ message.id }})"
+    >
+      <span>&times;</span>
+    </button>
+    {% endif %}
+    <h4>{{message.recipient_username}}</h4>
+    <p>{{message.date.strftime('%m-%d-%Y %I:%M %p')}}</p>
+    <p>{{message.content}}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% include "messages.html"%} {%block content%}
+
+<h4>Create Message</h4>
+
+<form method="POST">
+  <h5>Search for User</h5>
+  <div class="form-group">
+    <label for="name">To:</label>
+    <input
+      type="number"
+      class="form-control"
+      id="name"
+      name="name"
+      placeholder="To:"
+    />
+  </div>
+  <div class="form-group">
+    <label for="content">Write a Message:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="content"
+      name="content"
+      placeholder="Write a Message:"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

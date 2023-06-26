@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel = "stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"
+    <title>{% block title %}Search{% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      
+      <div class="navbar-nav">
+      <a  class="nav-item nav-link" href="/home"><span>Home</span></a>
+      <form method="POST" class="d-flex" >
+        <input
+        id="search-input"
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        name="searched"
+        value="{{ request.form['searched'] }}"
+      />
+      </form>
+      </div>
+    </nav>
+
+    <h1 align="center">Search</h1>
+
+    <ul class="navbar_interior">
+      <a onClick="searchFor(1,'users-link','posts-link','groups-link')" id="users-link" class="active"><li>Users</li></a>
+      <a onClick="searchFor(2,'posts-link','groups-link','users-link')"  id="posts-link"><li>Posts</li></a>
+      <a onClick="searchFor(3,'groups-link','users-link','posts-link')"  id="groups-link"><li>Groups</li></a>
+    </ul>
+    <ul id="users-list"></ul>
+    <div class="container">{% block content %} {% endblock %}</div>
+    
+    {% block javascript %}
+    <script
+      type="text/javascript"
+      src="{{url_for('static',filename='search.js')}}"
+      ;
+    ></script>
+    {% endblock %}
+  </body>
+  </html>

@@ -1,0 +1,29 @@
+{% include "header.html"%} {%block content%}
+
+<form method="POST">
+  <h5>Edit Group</h5>
+
+  <div class="form-group">
+    <label for="name">Group Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      placeholder="What is your group's title:"
+    />
+  </div>
+  <div class="form-group">
+    <label for="details">Group Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="details"
+      name="details"
+      placeholder="Describe your group:"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+{% endblock %}

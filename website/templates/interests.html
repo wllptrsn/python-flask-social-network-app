@@ -1,0 +1,26 @@
+{% extends "header.html" %} {% block title %}Show Interests{% endblock %} {%block
+content%}
+
+<h4>Choose Interests</h4>
+
+<form method="POST">
+{% for interest in interests %}
+<div
+  {%for
+  userInterest
+  in
+  userInterests%}
+  {% if userInterest.interest_id == interest.id and userInterest.user_id == user.id %}
+  class="interest_card_selected"
+  {% endif %}
+  {% endfor %}
+  id="interest_card"
+  type="post"
+  onClick="addInterest({{interest.id}})"
+>
+  <h5 align="center">{{interest.title}}</h5>
+</div>
+{% endfor%}
+  <button type="submit" class="btn btn-primary">Move on</button>
+</form>
+{%endblock%}

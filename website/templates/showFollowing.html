@@ -1,0 +1,16 @@
+{% include "followerPage.html" %} {%block content%}
+
+<ul class="list-froup list-group-flush" id="messages">
+  {% for follow in following%}
+  <li>
+    {% for account in accounts %} {% if account.id == follow.followed_id %} {%
+    for profile in account.profile %}
+    <img
+      src="{{url_for('static', filename= 'img/' + account.profiles.profile_pic)}}"
+      class="thumbnail_profile"
+    />
+    {% endfor %} {% endif %}{% endfor %}{{follow.follower_username}}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

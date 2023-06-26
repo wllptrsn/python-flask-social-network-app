@@ -1,0 +1,29 @@
+{% extends "header.html" %} {% block title %}Show Interests{% endblock %}
+{%block content%}
+
+<h4>Choose Interests</h4>
+
+<form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="profile_pic">Profile Pic</label>
+    <input
+      type="file"
+      class="form-control"
+      id="profile_pic"
+      name="profile_pic"
+      accept="image/*"
+      capture
+    />
+  </div>
+  <div class="form-group">
+    <label for="email">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      name="description"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Move on</button>
+</form>
+{%endblock%}

@@ -1,0 +1,14 @@
+{% include "header.html"%} {%block content%}
+
+<form method="POST">
+  <h5>
+    Are you sure you want to delete this group? Once you have done this, it
+    cannot be undone.
+  </h5>
+
+  <button type="submit" class="btn btn-danger">Delete</button>
+  <a href="/groups"
+    ><button type="button" class="btn btn-primary">Cancel</button></a
+  >
+</form>
+{% endblock %}
